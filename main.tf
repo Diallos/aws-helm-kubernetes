@@ -1,8 +1,8 @@
 provider "aws" {
   version = "~> 2.0"
   region  = "eu-west-3" # Setting my region to Paris. Use your own region here
-  access_key = "AKIA2K45FFN26A4I5LXM"
-  secret_key = "4uxlAzLWW6aQofeAnli+yAzOcNi0ygSi9+oxwuzi"
+  access_key = "***********************"
+  secret_key = "*******************************"
 }
 
 resource "aws_ecr_repository" "my_first_ecr_repo" {
