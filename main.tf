@@ -1,8 +1,8 @@
 provider "aws" {
   version = "~> 2.0"
   region  = "eu-west-3" # Setting my region to Paris. Use your own region here
-  access_key = "***********************"
-  secret_key = "*******************************"
+  access_key = "***********************" # Use your AWS access key here
+  secret_key = "*******************************" # Use your AWS secret key here
 }
 
 resource "aws_ecr_repository" "my_first_ecr_repo" {
