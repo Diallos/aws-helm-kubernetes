@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hello-world.service.name" . }}
+  labels:
+{{ include "hello-world.labels" . | indent 4 }}
+{{- if .Values.image.metricsPort }}
+    prometheus: "true"
+{{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: {{ .Values.service.exposedServicePort }}
+      targetPort: http
+    {{- if .Values.image.metricsPort }}
+    - name: http-metrics
+      port: {{ .Values.service.exposedMetricsPort }}
+      targetPort: http-metrics
+    {{- end }}
+  selector:
+{{ include "hello-world.labels.selector" . | indent 4 }}
