@@ -1,37 +1,33 @@
 pipeline {
     node{
 		def Namespace = "default"
-		def ImageName = "Demo/K8s"
-		def Creds = "3dhf6hhd-a300-78ee-kjg5-7j3dfhjg7764"
+		def ImageName = "aws-helm-kubernetes"
+		def imageTag = "v.01"
+		def Creds = "1960cfcf-bb7d-462d-a545-34e036069f4e"
+		def GitURL = "https://github.com/Diallos/aws-helm-kubernetes.git"
 	}
 
     stages {
-	
-		try{
-		
-			stage('Checkout'){
-			  git 'CI/CD-K8s.git
-			  sh "git rev-parse --short HEAD > .git/commit-id"
-			  imageTag= readFile('.git/commit-id').trim()
-			}
-			
-			stage('RUN Unit Tests'){
-				  sh "npm install"
-				  sh "npm test"
-			}
-			stage('Docker Build, Push'){
-				withDockerRegistry([credentialsId: "${Creds}", url: 'https://index.docker.io/v1/']) {
-				  sh "docker build -t ${ImageName}:${imageTag} ."
-				  sh "docker push ${ImageName}"
-				}
-			}
-			stage('Deploy on K8s'){
-				sh "ansible-playbook /var/lib/jenkins/ansible/Demo-deploy/deploy.yml  --user=jenkins --extra-vars ImageName=${ImageName} --extra-vars imageTag=${imageTag} --extra-vars Namespace=${Namespace}"
-			}
-			 
-		}catch (err) {
-			  currentBuild.result = 'FAILURE'
-			}
+
+		stage('Checkout'){
+			checkout([$class: 'GitSCM',
+			branches: [[name: '*/master']],
+			doGenerateSubmoduleConfigurations: false,
+			extensions: [],
+			submoduleCfg: [],
+			userRemoteConfigs: [[credentialsId: "${Creds}", url: "${GitURL}"]]]
+			)
 		}
+		
+		stage('BUILD'){
+			  sh "npm init --y"
+			  sh "npm install express"
+		}
+		stage('Docker Build and Push to local registry'){
+			 sh "docker build -f Dockerfile -t ${ImageName}:${imageTag} ."
+		}
+		stage('Deploy on K8s'){
+			sh "ansible-playbook aws-helm-kubernetes.yml --connection=local"
+		}	 
     }
 }
