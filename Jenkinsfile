@@ -2,7 +2,7 @@ pipeline {
     node{
 		def Namespace = "default"
 		def ImageName = "aws-helm-kubernetes"
-		def imageTag = "v.01"
+		def ImageTag = "v.01"
 		def Creds = "1960cfcf-bb7d-462d-a545-34e036069f4e"
 		def GitURL = "https://github.com/Diallos/aws-helm-kubernetes.git"
 	}
@@ -24,7 +24,7 @@ pipeline {
 			  sh "npm install express"
 		}
 		stage('Docker Build and Push to local registry'){
-			 sh "docker build -f Dockerfile -t ${ImageName}:${imageTag} ."
+			 sh "docker build -f Dockerfile -t ${ImageName}:${ImageTag} ."
 		}
 		stage('Deploy on K8s'){
 			sh "ansible-playbook aws-helm-kubernetes.yml --connection=local"
