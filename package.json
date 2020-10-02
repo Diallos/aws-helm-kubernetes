@@ -1,0 +1,24 @@
+{
+  "name": "aws",
+  "version": "1.0.0",
+  "description": "How to Deploy a Docker Application on AWS ECS with Terraform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diallos/hello-world.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Diallos/aws/issues"
+  },
+  "homepage": "https://github.com/Diallos/aws#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
+}

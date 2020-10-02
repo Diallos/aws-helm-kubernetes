@@ -1,0 +1,15 @@
+---
+  - name: "Ansible to deploy Hello World"
+    hosts: localhost
+    vars:
+      Namespace: "default"
+    gather_facts: no
+    connection: local 
+    tasks:
+    - name: Create Namespace {{ Namespace }}
+      command: "kubectl create namespace {{ Namespace }}"
+      ignore_errors: yes
+    - name: Deploy Hello World
+      command: "helm install -f values.yaml hello-world ."
+      delegate_to: localhost
+      ignore_errors: yes
