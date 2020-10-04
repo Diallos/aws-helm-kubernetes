@@ -1,11 +1,10 @@
-#!/usr/bin/env groovy
+def Namespace = "default"
+def ImageName = "aws-helm-kubernetes"
+def ImageTag = "v.01"
+def Creds = "1960cfcf-bb7d-462d-a545-34e036069f4e"
+def GitURL = "https://github.com/Diallos/aws-helm-kubernetes.git"
+	
 pipeline {
-
-	def Namespace = "default"
-	def ImageName = "aws-helm-kubernetes"
-	def ImageTag = "v.01"
-	def Creds = "1960cfcf-bb7d-462d-a545-34e036069f4e"
-	def GitURL = "https://github.com/Diallos/aws-helm-kubernetes.git"
 
 	agent { docker { image 'node:6.3' } }
 	
