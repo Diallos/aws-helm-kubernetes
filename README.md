@@ -10,13 +10,13 @@ Présentation du guide
 Nous suivrons ces étapes:
 
 ```
-    Installation de Docker
-    Installation de Kubernetes
-    Installation de Helm
-    Installation de Ansible
-    Déploiement Helm
-    Installation de Jenkins
-    Déploiement avec Jenkins
+Installation de Docker
+Installation de Kubernetes
+Installation de Helm
+Installation de Ansible
+Déploiement Helm
+Installation de Jenkins
+Déploiement avec Jenkins
 ```
 
 Installation de Docker
@@ -29,45 +29,45 @@ Installation de Kubernetes
 Dans notre exemple on va installer Kubernetes sous Windows familial pour cela on va installer minikube. Les différentes procédures d’installation sont décrites ici pour les autres OS et Windows professionnel Le guide de démarrage de minikube: https://kubernetes.io/fr/docs/setup/learning-environment/minikube/ Ci-dessous la liste de quelques commandes utiles avec minikube
 
 									
-# Modifier la config minikube
+## Modifier la config minikube
 minikube config
     minikube config set memory 1024 : Exemple pour reconfigurer la mémoire vive
 
-# Accéder à l'interface web d'administration Kubernetes
+## Accéder à l'interface web d'administration Kubernetes
 minikube dashboard
 
-# Récupérer l'adresse IP du cluster en cours d'exécution
+## Récupérer l'adresse IP du cluster en cours d'exécution
 minikube ip 
 
-# Obtenir les logs de l'instance en cours d'exécution pour du débogage
+## Obtenir les logs de l'instance en cours d'exécution pour du débogage
 minikube logs 
     -f ou --follow : Suivre en permanence les logs de Minikube
     -n ou --length : Nombre de lignes à afficher (50 par défaut)
     --problems : Afficher uniquement les logs qui pointent vers des problèmes connus
 
-# Se connecter en ssh sur le nœud Minikube
+## Se connecter en ssh sur le nœud Minikube
 minikube ssh
 
-# Démarrer un cluster Kubernetes local
+## Démarrer un cluster Kubernetes local
 minikube start
     --cpu  : Nombre de processeurs alloués au minikube VM (2 par défaut)
     --disk-size  : Taille de disque allouée à la VM minikube (format ], où unité = b, k, m or g) (par défaut "20g")
     --memory  : Quantité de RAM allouée à la VM mini-cube en Mo (par défaut 2048)
     --vm-driver  : Hyperviseur à utiliser (par défaut VirtualBox)
 
-# Supprimer un cluster Kubernetes local
+## Supprimer un cluster Kubernetes local
 minikube delete
 
-# Obtenir le statut d'un cluster Kubernetes local
+## Obtenir le statut d'un cluster Kubernetes local
 minikube status
 
-# Arrêter un cluster Kubernetes en cours d'exécution
+## Arrêter un cluster Kubernetes en cours d'exécution
 minikube stop 
 
-# Afficher le numéro de la version actuelle et la plus récente de Minikube 
+## Afficher le numéro de la version actuelle et la plus récente de Minikube 
 minikube update-check 
 
-# Afficher la version de Minikube
+## Afficher la version de Minikube
 minikube version
 								
 
@@ -88,13 +88,13 @@ Ouvrez le Microsoft Store et recherchez Ubuntu pour installer la dernière versi
 
 Après l’installation, vous verrez un bouton de lancement, utilisez-le pour ouvrir Ubuntu bash. Sur Ubuntu bash, il vous demandera de définir le nom d’utilisateur et le mot de passe de l’utilisateur par défaut. Il est temps d’installer Ansible avec les commandes suivantes.
 
-									
+```								
 sudo apt-get update
 sudo apt-get install software-properties-common
 sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get update
 sudo apt-get install ansible
-								
+```							
 
 Appuyez sur Y lorsqu’il demande…
 
@@ -106,8 +106,9 @@ Installation de helm
 
 Il existe plusieurs façons d’installer Helm, dans notre cas nous allons utiliser choco pour l’installer sur windows 10
 
-									
+```							
 choco install kubernetes-helm
+```
 
 #Avec la version 3 de Helm, pas besoin d'exzcuter la commande helm init
 								
@@ -198,7 +199,7 @@ Installation de kubectl dans WSL
 
 Exécutons les commandes suivantes pour l’installation kubectl
 
-									
+```									
 $ sudo apt-get update && sudoapt-get install -y apt-transport-https   
 
 $ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -                       
@@ -207,17 +208,17 @@ $ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /et
 
 $ sudo apt-getupdate               
 $ sudo apt-get install -y kubectl
-								
+```							
 
 Ensuite on va lier minikube de Windows 10 à notre kubectl dans WSL
 
-									
+```								
 $ kubectl config set-cluster minikube --server=https://: --certificate-authority=/mnt/c/Users//.minikube/ca.crt 
 
 $kubectl config set-credentials minikube --client-certificate=/mnt/c/Users//.minikube/client.crt --client-key=/mnt/c/Users//.minikube/client.key
 
 $kubectl config set-context minikube --cluster=minikube --user=Minikube
-								
+```							
 
 Où vous devez remplacer:
 • par l’IP public de votre cluster Minikube.
@@ -225,23 +226,23 @@ Où vous devez remplacer:
 • par votre login Widows
 Maintenant vous pouvez vous connecter à votre cluster kubernetes depuis WSL
 
-									
+```								
 $ kubectl config use-context minikube
 $ kubectl get nodes
-								
+```							
 
 Installation de docker dans WSL
 
 Il faut installer docker dans WSL en suivant la procédure officielle: https://docs.docker.com/engine/install/ubuntu/
 Ensuite on va faire de tel sorte que le docker installé dans WSL pointe vers notre docker-machine installé sous Windows 10
 
-									
+```							
 $ mkdir -p ~/.docker
 $ ln -s /mnt/c/Users//.docker/machine/certs/ca.pem ~/.docker/ca.pem
 $ ln -s /mnt/c/Users//.docker/machine/certs/ca-key.pem ~/.docker/ca-key.pem
 $ ln -s /mnt/c/Users//.docker/machine/certs/cert.pem ~/.docker/cert.pem
 $ ln -s /mnt/c/Users//.docker/machine/certs/key.pem ~/.docker/key.pem
-								
+```							
 
 Ajouter dans le .bashsrc les lignes suivantes:
 
@@ -281,10 +282,10 @@ Le playbook que nous utiliserons dans cet article reprend les différentes comma
 
 Et, enfin, on démarre docker puis kubernetes et on exécute le playbook.
 
-									
+```							
 >cd /c/home/projects/aws-helm-kubernetes/helm
 >ansible-playbook aws-helm-kubernetes.yml --connection=local
-								
+```						
 
 On voit bien ci-dessous avec la commande « kubectl get pods » dans WSL qu’on a réussi à déployer notre image docker dans kubernetes à l’aide d’ansible et helm
 
