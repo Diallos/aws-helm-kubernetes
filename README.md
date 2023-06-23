@@ -19,7 +19,7 @@ Installation de Jenkins
 Déploiement avec Jenkins
 ```
 
-Installation de Docker
+# Installation de Docker
 
 Dans notre exemple on va installer Docker sous Windows, la procédure est différente pour les autres OS.
 Si vous disposez d’un Windows professionnel alors il faut utiliser Docker for windows
@@ -29,17 +29,17 @@ Installation de Kubernetes
 Dans notre exemple on va installer Kubernetes sous Windows familial pour cela on va installer minikube. Les différentes procédures d’installation sont décrites ici pour les autres OS et Windows professionnel Le guide de démarrage de minikube: https://kubernetes.io/fr/docs/setup/learning-environment/minikube/ Ci-dessous la liste de quelques commandes utiles avec minikube
 
 									
-## Modifier la config minikube
+### Modifier la config minikube
 minikube config
     minikube config set memory 1024  //Est un exemple pour reconfigurer la mémoire vive
 
-## Accéder à l'interface web d'administration Kubernetes
+### Accéder à l'interface web d'administration Kubernetes
 minikube dashboard
 
-## Récupérer l'adresse IP du cluster en cours d'exécution
+### Récupérer l'adresse IP du cluster en cours d'exécution
 minikube ip 
 
-## Obtenir les logs de l'instance en cours d'exécution pour du débogage
+### Obtenir les logs de l'instance en cours d'exécution pour du débogage
 minikube logs 
 
     -f ou --follow : Suivre en permanence les logs de Minikube
@@ -48,10 +48,10 @@ minikube logs
     
     --problems : Afficher uniquement les logs qui pointent vers des problèmes connus
 
-## Se connecter en ssh sur le nœud Minikube
+### Se connecter en ssh sur le nœud Minikube
 minikube ssh
 
-## Démarrer un cluster Kubernetes local
+### Démarrer un cluster Kubernetes local
 minikube start
 
     --cpu  : Nombre de processeurs alloués au minikube VM (2 par défaut)
@@ -62,23 +62,23 @@ minikube start
     
     --vm-driver  : Hyperviseur à utiliser (par défaut VirtualBox)
 
-## Supprimer un cluster Kubernetes local
+### Supprimer un cluster Kubernetes local
 minikube delete
 
-## Obtenir le statut d'un cluster Kubernetes local
+### Obtenir le statut d'un cluster Kubernetes local
 minikube status
 
-## Arrêter un cluster Kubernetes en cours d'exécution
+### Arrêter un cluster Kubernetes en cours d'exécution
 minikube stop 
 
-## Afficher le numéro de la version actuelle et la plus récente de Minikube 
+### Afficher le numéro de la version actuelle et la plus récente de Minikube 
 minikube update-check 
 
-## Afficher la version de Minikube
+### Afficher la version de Minikube
 minikube version
 								
 
-Installation d'Ansible
+# Installation d'Ansible
 
 Pour installer ansible sous Linux il suffit de suivre la documentation officielle https://docs.ansible.com/ansible/latest/installation_guide/index.html Dans notre cas pour l’installation sous windows 10, nous allons activer/installer Ubuntu TLS, ensuite installer ansible Merci à Microsoft. Il est désormais possible d’installer Ubuntu sur Windows 10!! Recherchez les fonctionnalités Windows dans la zone de recherche. Et lorsque le « Activer ou désactiver les fonctionnalités de Windows » apparaît, cliquez dessus.
 
