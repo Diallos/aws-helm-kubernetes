@@ -31,7 +31,7 @@ Dans notre exemple on va installer Kubernetes sous Windows familial pour cela on
 									
 ## Modifier la config minikube
 minikube config
-    minikube config set memory 1024 : Exemple pour reconfigurer la mémoire vive
+    minikube config set memory 1024  //Est un exemple pour reconfigurer la mémoire vive
 
 ## Accéder à l'interface web d'administration Kubernetes
 minikube dashboard
@@ -41,8 +41,11 @@ minikube ip
 
 ## Obtenir les logs de l'instance en cours d'exécution pour du débogage
 minikube logs 
+
     -f ou --follow : Suivre en permanence les logs de Minikube
+    
     -n ou --length : Nombre de lignes à afficher (50 par défaut)
+    
     --problems : Afficher uniquement les logs qui pointent vers des problèmes connus
 
 ## Se connecter en ssh sur le nœud Minikube
@@ -50,9 +53,13 @@ minikube ssh
 
 ## Démarrer un cluster Kubernetes local
 minikube start
+
     --cpu  : Nombre de processeurs alloués au minikube VM (2 par défaut)
+    
     --disk-size  : Taille de disque allouée à la VM minikube (format ], où unité = b, k, m or g) (par défaut "20g")
+    
     --memory  : Quantité de RAM allouée à la VM mini-cube en Mo (par défaut 2048)
+    
     --vm-driver  : Hyperviseur à utiliser (par défaut VirtualBox)
 
 ## Supprimer un cluster Kubernetes local
