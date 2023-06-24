@@ -152,8 +152,11 @@ On aura le résultat suivant:
 
 								
 >SET DOCKER_TLS_VERIFY=1
+>
 >SET DOCKER_HOST=tcp://192.168.99.102:2376
+>
 >SET DOCKER_CERT_PATH=C:\Users\diall.minikube\certs
+>
 >SET MINIKUBE_ACTIVE_DOCKERD=minikube
 							
 
