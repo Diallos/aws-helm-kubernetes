@@ -609,7 +609,7 @@ Vous devriez voir votre application sur http://localhost:3000/:
 
 Si vous êtes nouveau sur Docker, je recommande fortement le guide de démarrage officiel. Je vous promets qu’ils valent bien votre temps. Créez un Dockerfiledans votre répertoire de projet et remplissez-le avec le code suivant:
 
-									
+```									
 # Use an official Node runtime as a parent image
 FROM node:12.7.0-alpine
 
@@ -630,7 +630,7 @@ EXPOSE 3000
 
 # Run index.js when the container launches
 CMD ["node", "index.js"]
-								
+```								
 
 Étape 3. Envoyez l’application Node à AWS ECR
 
