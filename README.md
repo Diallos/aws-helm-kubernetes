@@ -109,6 +109,7 @@ Appuyez sur Y lorsqu’il demande…
 
 
 L’installation d’ansible s’est terminée avec succès.
+
 Installation de helm
 
 Il existe plusieurs façons d’installer Helm, dans notre cas nous allons utiliser choco pour l’installer sur windows 10
@@ -124,15 +125,16 @@ Voir la documentation pour obtenir plus d’options: https://helm.sh/docs/intro/
 
 									
 >git clone https://github.com/Diallos/aws-helm-kubernetes.git
+>
 >cd aws-helm-kubernetes
 								
 
 Il faut démarrer si ce n’est pas déjà fait: docker ensuite kubernetes pour les étapes suivantes. Ensuite On va builder en local l’image docker de notre repository « aws-helm-kubernetes » mais avant de le faire on va setter les variables d’environnement de minikube pour qu’il trouve les images docker en local sinon le cluster kubernetes ne pourra pas le « puller » et on risque d’avoir l’erreur suivante lors du déploiement:
 
-								
+```								
 Warning Failed 4s (x2 over 19s) kubelet, minikube Failed to pull image "aws-helm-kubernetes:v.01": rpc error: code = Unknown desc = Error response from daemon: pull access denied for aws-app:v.01, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
 Warning Failed 4s (x2 over 19s) kubelet, minikube Error: ErrImagePull
-								
+```								
 
 Pour les systèmes Linux exécuter la commande suivante:
 
@@ -159,7 +161,9 @@ Donc il faudra setter tous ces variables d’environnement ci-dessous Après on 
 
 								
 >npm init --y
+>
 >npm install express
+>
 >docker build -f Dockerfile -t aws-helm-kubernetes:v.01 .
 							
 
@@ -173,6 +177,7 @@ Tout d’abord il faut se déplacer dans le répertoire du helm chart « aws-hel
 
 									
 >cd helm
+>
 >helm install -f values.yaml hello-world .
 								
 
@@ -199,6 +204,7 @@ traefik-6f7dcc868f-x4sfn 1/1 Running 1 25h
 ```						
 
 On vient de voir comment builder et déployer en local une image docker dans un cluster kubertenes à l’aide du helm chart
+
 Déployons l’image docker dans kubernetes à l’aider d’Ansible
 
 Dans notre étude de cas, on va utiliser ansible pour déployer l’image docker dans le cluster kubernetes, donc ansible a besoin de docker, du helm et de kubernetes Pour rappel Ansible est installé dans WSL donc il n’est pas accessible depuis notre prompt Windows et depuis le WSL ansible n’a pas accès non plus au docker, au kubernetes et au helm insallé dans Windows. Dans la section suivante on faire de tel sorte que le docker et le kubernetes installés sous windows 10 familial soit directement accessible dans WSL, la procédure est différente pour Windows professionnel mais l’idée reste la même.
@@ -213,7 +219,8 @@ $ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key a
 
 $ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list       
 
-$ sudo apt-getupdate               
+$ sudo apt-getupdate
+
 $ sudo apt-get install -y kubectl
 ```							
 
@@ -235,12 +242,14 @@ Maintenant vous pouvez vous connecter à votre cluster kubernetes depuis WSL
 
 ```								
 $ kubectl config use-context minikube
+
 $ kubectl get nodes
 ```							
 
 Installation de docker dans WSL
 
 Il faut installer docker dans WSL en suivant la procédure officielle: https://docs.docker.com/engine/install/ubuntu/
+
 Ensuite on va faire de tel sorte que le docker installé dans WSL pointe vers notre docker-machine installé sous Windows 10
 
 ```							
@@ -291,6 +300,7 @@ Et, enfin, on démarre docker puis kubernetes et on exécute le playbook.
 
 ```							
 >cd /c/home/projects/aws-helm-kubernetes/helm
+
 >ansible-playbook aws-helm-kubernetes.yml --connection=local
 ```						
 
