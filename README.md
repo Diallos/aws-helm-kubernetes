@@ -330,13 +330,20 @@ Pour voir comment cela fonctionne, commençons par l’installation de Jenkins.
 Nous utiliserons une machine Windows avec Docker et Kubernetes déjà installés.
 Installation de Jenkins
 
-Téléchargement Pour télécharger votre copie de Jenkins, allez directement sur la page https://jenkins.io/download/ et sélectionner l’archive qui convient pour votre système d’exploitation. Dans ce tutoriel, j’ai sélectionné le war pour windows. Vous pouvez aussi en fonction des besoins, télécharger l’installeur windows. Seulement dans ce cas, l’étape d’installation va différer par rapport à la présentation qui va suivre. Installation et exécution 2 façons de procéder pour installer Jenkins: via l’archive war ou via l’installeur windows.
+Téléchargement
+
+Pour télécharger votre copie de Jenkins, allez directement sur la page https://jenkins.io/download/ et sélectionner l’archive qui convient pour votre système d’exploitation. Dans ce tutoriel, j’ai sélectionné le war pour windows. Vous pouvez aussi en fonction des besoins, télécharger l’installeur windows. Seulement dans ce cas, l’étape d’installation va différer par rapport à la présentation qui va suivre. Installation et exécution 2 façons de procéder pour installer Jenkins: via l’archive war ou via l’installeur windows.
+
 Si vous avez opté de télécharger la version avec le zip contenant l’installeur windows, pour effectuer l’installation, il suffit d’extraire et lancer le fichier exécutable, en suite suivre les indications pour terminer l’installation.
 Ici nous abordons l’installation via l’archive war.
+
 L'archive war téléchargé est un conteneur tomcat qui peut être installé dans un serveur d’application comme tomcat. Il peut être aussi exécuté directement à partir de la commande suivante depuis une console windows.
-java -jar jenkins.war
+
+>java -jar jenkins.war
+
 En cas d’erreur, vérifier que le jdk est bien installé.
 Si tout se passe bien, Cette commande démarre Jenkins sur le port 8080. Il sera possible de modifier le port lorsque nous allons configurer l’instance. Vérifier que sur la console windows, aucune erreur n’est reportée. Vous pouvez alors accéder à l’url http://localhost:8080. Patienter pendant le chargement de la page. Merci de ne pas fermer la console windows qui vous a permis de démarrer jenkins.
+
 Suivez les instruction de configuration de démarrage de Jenkins. Si vous voyez la fenêtre ci-dessous, lorsque vous allez sur http://localhost:8080, pas de panique, tout va bien. Jenkins veut juste s’assurer qu’il s’agit bien d’un administrateur du poste sur le quel vous essayez de l’installer. Suivez les instructions. Copiez et collez le mot de passe comme indiqué.
 
 ![image](https://github.com/Diallos/aws-helm-kubernetes/assets/12511767/3e85f97f-fae3-4ee5-bc5f-b5e45d8f80e1)
